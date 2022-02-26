@@ -7,18 +7,15 @@ public class CameraReset : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // resets the camera position to the origin if the "tab" key is pressed
         if (Input.GetKeyDown(KeyCode.Tab)) {
             this.transform.position = new Vector3(0, 0, 0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.F)) {
-            this.transform.Rotate(0, 180.0f, 0);
         }
 
         // todo: pressing m key should make a certain cube either mirror or follow the user's movements

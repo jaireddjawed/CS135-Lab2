@@ -18,17 +18,7 @@ public class CameraReset : MonoBehaviour
             this.transform.position = new Vector3(0, 0, 0);
         }
 
-        // todo: pressing m key should make a certain cube either mirror or follow the user's movements
-
-        /*if (Input.GetKeyDown(KeyCode.M)) {
-            GameObject cube = GameObject.Find("Cube");
-            if (cube.GetComponent<Mirror>().enabled) {
-                cube.GetComponent<Mirror>().enabled = false;
-            } else {
-                cube.GetComponent<Mirror>().enabled = true;
-            }
-        }*/
-
+        // pressing the escape key quits the game
         if (Input.GetKeyDown(KeyCode.Escape)) {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

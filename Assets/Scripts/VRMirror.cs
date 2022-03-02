@@ -6,54 +6,74 @@ public class VRMirror : MonoBehaviour
 {
     public OVRCameraRig camera;
 
-    Quaternion originalCameraRotation;
+    bool isMatching = false;
+    bool isMirroring = false;
 
-    bool mPressedOnce = false;
-    bool mPressedTwice = false;
-    bool rotateTime = false;
+    bool rotationTrackingOn = true;
+    bool positionTrackingOn = true;
 
     // Start is called before the first frame update
     void Start()
     {
-      originalCameraRotation = camera.transform.rotation;
+
     }
 
     // Update is called once per frame
     void Update()
     {
       // pressing the m key once should make the cube match your movements
-      if (Input.GetKeyDown(KeyCode.M)) {
-        mPressedOnce = true;
-        rotateTime = true;
-      }
+      if (Input.GetKeyDown(KeyCode.M))
+      {
+        // once m is pressed once, set isMatching to true
+        // once m is pressed twice, set isMatching to false and isMirroring to true
 
-      if (mPressedOnce && rotateTime) {
-        Debug.Log("Here");
-      transform.eulerAngles = new Vector3(
-        originalCameraRotation.x,
-        originalCameraRotation.y,
-        originalCameraRotation.z
-      );
-
-      rotateTime = false;
-      }
-
-      /*if (mPressedOnce) {
-        float positionOffset = Vector3.Distance(Camera.main.transform.position, originalPos);
-        transform.position = transform.position + Camera.main.transform.forward * positionOffset * Time.deltaTime;
-
-        Quaternion newRotation = this.transform.rotation;
-        newRotation.y = Camera.main.transform.rotation.y;
-        this.transform.rotation = newRotation;
-
-        if (Input.GetKeyDown(KeyCode.M)) {
-          mPressedOnce = false;
-          mPressedTwice = true;
+        if (isMatching)
+        {
+          isMatching = false;
+          isMirroring = true;
+        }
+        else
+        {
+          isMatching = true;
+          isMirroring = false;
         }
       }
 
-      if (mPressedTwice) {
+      if (isMatching)
+      {
+          // if isMatching is true, match the camera to the cube
+          // this is done by setting the camera's position to the cube's position
+          // and the camera's rotation to the cube's rotation
+          if (positionTrackingOn)
+          {
+            // camera.transform.position = transform.position;
+          }
+          if (rotationTrackingOn)
+          {
+            // transform.rotation = camera.centerEyeAnchor.transform.rotation;
+          }
+      }
 
-      }*/
+      if (isMirroring)
+      {
+          if (positionTrackingOn)
+          {
+            // camera.transform.position = transform.position;
+          }
+          if (rotationTrackingOn)
+          {
+            // transform.rotation = camera.centerEyeAnchor.transform.rotation;
+          }
+      }
+    }
+
+    public void toggleRotationTracking()
+    {
+      rotationTrackingOn = !rotationTrackingOn;
+    }
+
+    public void togglePositionTracking()
+    {
+      positionTrackingOn = !positionTrackingOn;
     }
 }

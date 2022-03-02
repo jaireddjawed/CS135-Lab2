@@ -14,7 +14,8 @@ public class CameraFlipper : MonoBehaviour
     void Update()
     {
         // flips the camera position 180 degrees if "F" is pressed
-        if (Input.GetKeyDown(KeyCode.F)) {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
             this.transform.Rotate(0, 180.0f, 0);
         }
     }

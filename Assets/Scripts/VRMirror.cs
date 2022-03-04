@@ -9,13 +9,12 @@ public class VRMirror : MonoBehaviour
     bool isMatching = false;
     bool isMirroring = false;
 
-    bool rotationTrackingOn = true;
-    bool positionTrackingOn = true;
+    Vector3 originalCamPos;
 
     // Start is called before the first frame update
     void Start()
     {
-
+      originalCamPos = camera.centerEyeAnchor.position;
     }
 
     // Update is called once per frame
@@ -44,36 +43,28 @@ public class VRMirror : MonoBehaviour
           // if isMatching is true, match the camera to the cube
           // this is done by setting the camera's position to the cube's position
           // and the camera's rotation to the cube's rotation
-          if (positionTrackingOn)
-          {
-            // camera.transform.position = transform.position;
-          }
-          if (rotationTrackingOn)
-          {
-            // transform.rotation = camera.centerEyeAnchor.transform.rotation;
-          }
+
+          // use offset of player's original position and add it to the face's position
+          transform.position += camera.centerEyeAnchor.position - originalCamPos;
+          originalCamPos = camera.centerEyeAnchor.position;
+
+          var rot = camera.centerEyeAnchor.transform.rotation;
+          transform.Rotate(rot.eulerAngles);
+
+          Debug.Log("Camera position: " + camera.centerEyeAnchor.position);
+          Debug.Log("Cube position: " + transform.position);
+
+          Debug.Log("Camera rotation: " + camera.centerEyeAnchor.transform.rotation);
+          Debug.Log("Cube rotation: " + transform.rotation);
+
+          Debug.Log("----------------");
       }
 
       if (isMirroring)
       {
-          if (positionTrackingOn)
-          {
-            // camera.transform.position = transform.position;
-          }
-          if (rotationTrackingOn)
-          {
-            // transform.rotation = camera.centerEyeAnchor.transform.rotation;
-          }
+transform.rotation = Quaternion.Inverse(camera.centerEyeAnchor.transform.rotation);
+
+        Debug.Log("Mirroring");
       }
-    }
-
-    public void toggleRotationTracking()
-    {
-      rotationTrackingOn = !rotationTrackingOn;
-    }
-
-    public void togglePositionTracking()
-    {
-      positionTrackingOn = !positionTrackingOn;
     }
 }

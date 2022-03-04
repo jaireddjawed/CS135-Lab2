@@ -17,6 +17,9 @@ public class CameraReset : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             this.transform.position = new Vector3(0, 0, 0);
+            // todo: make sure to double check that the movement from the joystick modifies the main OVRCameraRig's position
+            // todo: right now, it only modifies the OVRPlayerController's position
+            this.transform.GetChild(0).transform.position = new Vector3(0, 0, 0);
         }
 
         // pressing the escape key quits the game

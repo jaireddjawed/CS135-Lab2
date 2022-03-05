@@ -26,7 +26,8 @@ public class GenerateStimuli : MonoBehaviour
 
         Debug.Log("Red sphere radius: " + redSphereRadius);
         Debug.Log("Red sphere distance: " + redSphereDistance);
-        Debug.Log("Blue Sphere distance: " + Vector3.Distance(blueSphere1.transform.position, mainCameraParent.transform.position));
+        Debug.Log("Blue Sphere 1 distance: " + Vector3.Distance(blueSphere1.transform.position, mainCameraParent.transform.position));
+        Debug.Log("Blue Sphere 2 distance: " + Vector3.Distance(blueSphere2.transform.position, mainCameraParent.transform.position));
     }
 
     // Update is called once per frame
@@ -65,6 +66,8 @@ public class GenerateStimuli : MonoBehaviour
         blueSphere2.transform.localScale = new Vector3((redSphereRadius/redSphereDistance) * blueSphere2Radius,
                                                        (redSphereRadius/redSphereDistance) * blueSphere2Radius,
                                                        (redSphereRadius/redSphereDistance) * blueSphere2Radius);
+
+        Debug.Log("Blue Sphere 2 radius: " + blueSphere2.transform.localScale.x);
                                                        /*
             time += Time.deltaTime;
             // hide the red sphere immediately

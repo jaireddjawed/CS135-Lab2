@@ -49,22 +49,15 @@ public class VRMirror : MonoBehaviour
           originalCamPos = camera.centerEyeAnchor.position;
 
           var rot = camera.centerEyeAnchor.transform.rotation;
-          transform.Rotate(rot.eulerAngles);
-
-          Debug.Log("Camera position: " + camera.centerEyeAnchor.position);
-          Debug.Log("Cube position: " + transform.position);
-
-          Debug.Log("Camera rotation: " + camera.centerEyeAnchor.transform.rotation);
-          Debug.Log("Cube rotation: " + transform.rotation);
-
-          Debug.Log("----------------");
+          // shift rot by 90 degrees on the y axis
+          transform.rotation = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y - 90, rot.eulerAngles.z);
       }
 
       if (isMirroring)
       {
-transform.rotation = Quaternion.Inverse(camera.centerEyeAnchor.transform.rotation);
-
-        Debug.Log("Mirroring");
+        transform.position += camera.centerEyeAnchor.position - originalCamPos;
+        var rot = camera.centerEyeAnchor.transform.rotation;
+        transform.rotation = Quaternion.Euler(rot.eulerAngles.x, rot.eulerAngles.y + 90, rot.eulerAngles.z);
       }
     }
 }

@@ -24,7 +24,7 @@ public class ToggleTracking : MonoBehaviour
         {
             // toggle rotation tracking
             rotationTrackingEnabled = !rotationTrackingEnabled;
-            // rot = centerEyeAnchor.transform.rotation;
+            rot = centerEyeAnchor.transform.rotation;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -36,7 +36,7 @@ public class ToggleTracking : MonoBehaviour
         if (!rotationTrackingEnabled)
         {
             // if rotation tracking is disabled, disable the rotation tracking
-            mainCameraParent.transform.rotation = Quaternion.Inverse(rot);
+            mainCameraParent.transform.rotation = rot;
             //mainCameraParent.GetChild(1).GetComponent<OVRPlayerController>().EnableRotation = false;
             //playerController.EnableRotation = false;
         }
